@@ -2,5 +2,14 @@
 
 {% block main %}
 <h1 class="page-header">Profiles</h1>
-<p>This webpage is demonstration about user logins and database migrations.</p>
+<div> <h3> Customer Profiles </h3></div>
+<div>
+    
+    <ul>
+    {% for user in users %}
+    <li><a href="/profile/{{user.username}}"> {{ user.first_name }} {{user.last_name}}</a></li>
+    {% endfor %}
+  </ul>
+</div>    
+
 {% endblock %}
