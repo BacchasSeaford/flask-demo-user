@@ -37,8 +37,8 @@ def profile():
         gender = proform.gender.data
         file = request.files['file']
         filename = secure_filename(file.filename)
-        path = "./app/static/Profilepics/"+ filename
-        file.save(path)
+        path = "/static/Profilepics/"+ filename
+        file.save("./app"+ path)
         file = path
         user = UserProfile(100,username,firstname,lastname,age,gender,biography,file,date())
         db.session.add(user)
@@ -50,13 +50,13 @@ def profile():
     return render_template('profile.html', form = proform)
     
 @app.route('/profile/<userid>',methods=["GET","POST"])
-def viewprof(userid):
+def profileview(userid):
     profiles={}
     x=0
     if request.method=='POST':
         user= db.session.query(UserProfile).filter_by(username=userid)
-        for i in user:
-            prof={'userid':str(user.id),'username':user.username,'age':str(user.age),'firstname':user.firstname, 'lastname':user.lastname, 'gender':user.gender,'biography':user.biography, 'picture':user.filename,'profile_date':user.date_created}
+        for u in user:
+            prof={'userid':str(u.id),'username':u.username,'age':str(u.age),'firstname':u.firstname, 'lastname':u.lastname, 'gender':u.gender,'biography':u.biography, 'file':u.file,'profile_date':u.date_created}
             x+=1
         return jsonify(prof)
     user= db.session.query(UserProfile).filter_by(username=userid)
@@ -69,7 +69,6 @@ def profiles():
     p_l=[]
     profiles={}
     x=0
-    print request.method
     if request.method=="POST":
         users= db.session.query(UserProfile).all()
         for user in users:
@@ -78,16 +77,11 @@ def profiles():
             x+=1
         p_up={'users':jsonify(user_profile)}
         p_l.insert(0,p_up)
-        print x
         return jsonify(user_profile)
     users = db.session.query(UserProfile).all()
-    print "ABOVE"
     print users
-    
     for user in users:
         user_profile.append((user.firstname, user.username))
-        print user.firstname
-        print "IN ABOVE"
     return render_template('profiles.html', users=users) 
 
 

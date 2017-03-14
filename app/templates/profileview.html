@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+{% block main%}
+    {% for u in user %}
+    <div id ='divview'>
+    <img src="{{u.file}}"></img>
+    <h1>{{ u.firstname }} {{u.lastname}}</h1>
+    <h5><b>Date Created: {{u.date_created}}</b></h5>
+    <p><b>Username:</b> {{u.username}}<br>
+    <b>UserID:</b> {{u.id}}<br>
+    <b>Gender:</b> {{u.gender}}<br>
+    <b>Age:</b> {{u.age}}<br><br>
+    {{u.biography}}
+    </div>
+    </p> 
+    {% endfor %}
+    {% endblock%}
