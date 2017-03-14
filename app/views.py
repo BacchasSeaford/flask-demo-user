@@ -30,8 +30,8 @@ def profile():
     if request.method == 'POST':
         # Accept profile details
         username=proform.username.data
-        first_name = proform.first_name.data
-        last_name = proform.last_name.data
+        firstname = proform.firstname.data
+        lastname = proform.lastname.data
         age = proform.age.data
         biography = proform.biography.data
         gender = proform.gender.data
@@ -40,7 +40,7 @@ def profile():
         path = "./app/static/Profilepics/"+ filename
         file.save(path)
         file = path
-        user = UserProfile(100,username,first_name,last_name,age,gender,biography,file,date())
+        user = UserProfile(100,username,firstname,lastname,age,gender,biography,file,date())
         db.session.add(user)
         db.session.commit() 
         return redirect(url_for('profile'))
@@ -56,7 +56,7 @@ def viewprof(userid):
     if request.method=='POST':
         user= db.session.query(UserProfile).filter_by(username=userid)
         for i in user:
-            prof={'userid':str(user.id),'username':user.username,'age':str(user.age),'first_name':user.first_name, 'last_name':user.last_name, 'gender':user.gender,'biography':user.biography, 'picture':user.filename,'profile_date':user.date_created}
+            prof={'userid':str(user.id),'username':user.username,'age':str(user.age),'firstname':user.firstname, 'lastname':user.lastname, 'gender':user.gender,'biography':user.biography, 'picture':user.filename,'profile_date':user.date_created}
             x+=1
         return jsonify(prof)
     user= db.session.query(UserProfile).filter_by(username=userid)
@@ -85,8 +85,8 @@ def profiles():
     print users
     
     for user in users:
-        user_profile.append((user.first_name, user.username))
-        print user.first_name
+        user_profile.append((user.firstname, user.username))
+        print user.firstname
         print "IN ABOVE"
     return render_template('profiles.html', users=users) 
 

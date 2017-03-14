@@ -4,8 +4,8 @@ from wtforms.validators import InputRequired
 
 class profileForm(FlaskForm):
     username = StringField('username', validators=[InputRequired()])
-    first_name = StringField('firstname', validators=[InputRequired()])
-    last_name = StringField('lastname', validators=[InputRequired()])
+    firstname = StringField('firstname', validators=[InputRequired()])
+    lastname = StringField('lastname', validators=[InputRequired()])
     age = IntegerField('age', validators=[InputRequired()])
     gender = SelectField('gender', choices=[('male','female','other')])
     biography = TextAreaField('biography', validators=[InputRequired()])
