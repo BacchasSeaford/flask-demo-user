@@ -7,7 +7,7 @@ class UserProfile(db.Model):
     age=db.Column(db.Integer)
     gender=db.Column(db.String(6))
     biography=db.Column(db.String(350))
-    file=db.Column(db.String(45))
+    file=db.Column(db.String(46))
     date_created=db.Column(db.Date)
 
     def is_authenticated(self):

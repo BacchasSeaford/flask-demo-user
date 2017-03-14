@@ -6,7 +6,7 @@ This file creates your application.
 """
 import os, json, time
 from app import app, db
-from flask import render_template, request, redirect, url_for, flash, session, abort, jsonify
+from flask import render_template, request, redirect, url_for, flash, session, jsonify, abort
 from forms import profileForm
 from werkzeug.utils import secure_filename
 from models import UserProfile
